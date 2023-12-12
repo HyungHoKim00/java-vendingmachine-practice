@@ -22,14 +22,16 @@ public class Products {
 
     public boolean ableToBuy(int money) {
         return productNameAndDetails.values().stream()
-                .anyMatch(details -> details[0] < money || details[1] > 0);
+                .anyMatch(details -> details[0] < money)
+                && productNameAndDetails.values().stream()
+                .anyMatch(details -> details[1] > 0);
     }
 
     public int buy(String purchaseProduct, int userMoney) {
         if (noSuchProduct(purchaseProduct)) {
             throw new IllegalArgumentException(NO_PRODUCT);
         }
-        if (productNameAndDetails.get(purchaseProduct)[0] < userMoney) {
+        if (productNameAndDetails.get(purchaseProduct)[0] > userMoney) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
         productNameAndDetails.get(purchaseProduct)[1]--;
@@ -37,6 +39,6 @@ public class Products {
     }
 
     private boolean noSuchProduct(String product) {
-        return productNameAndDetails.containsKey(product) && productNameAndDetails.get(product)[1] != 0;
+        return !productNameAndDetails.containsKey(product) && productNameAndDetails.get(product)[1] == 0;
     }
 }

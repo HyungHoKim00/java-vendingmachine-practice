@@ -32,7 +32,7 @@ public enum Coin {
         putRandomCoins(money, changeCoins, coinAmounts);
         return changeCoins;
     }
-    
+
     public static Coin getCoin(int money) {
         return Arrays.stream(values())
                 .filter(coin -> coin.amount == money)

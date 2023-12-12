@@ -22,6 +22,10 @@ public class InputView {
         return products;
     }
 
+    public String readPurchase() {
+        return Console.readLine();
+    }
+
     private void validateMoney(String money) {
         if (!money.matches(POSITIVE_INTEGER_PATTERN)) {
             throw new IllegalArgumentException(ERR_MSG_NOT_NUMBER);
@@ -57,6 +61,6 @@ public class InputView {
                 POSITIVE_INTEGER_PATTERN)) {
             return false;
         }
-        return !invalidMoneyUnit(productDetails[1]) && !invalidMoneyUnit(productDetails[2]);
+        return invalidMoneyUnit(productDetails[1]) && invalidMoneyUnit(productDetails[2]);
     }
 }

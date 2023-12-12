@@ -1,7 +1,12 @@
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachine;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        VendingMachine vendingMachine = new VendingMachine(new InputView(), new OutputView());
+        vendingMachine.run();
     }
 }

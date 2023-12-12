@@ -17,6 +17,29 @@ public class Change {
         this.coins = Coin.generateChangeCoins(money);
     }
 
+    public String generateTotalCoinsOutput() {
+        return generateCoinsOutput(coins);
+    }
+
+    public String generateChangeOutput(int userMoney) {
+        return generateCoinsOutput(giveChange(userMoney));
+    }
+
+    private String generateCoinsOutput(Map<Coin, Integer> change) {
+        StringBuilder output = new StringBuilder();
+        appendKey(COIN_500, change, output);
+        appendKey(COIN_100, change, output);
+        appendKey(COIN_50, change, output);
+        appendKey(COIN_10, change, output);
+        return output.toString();
+    }
+
+    private void appendKey(Coin coin, Map<Coin, Integer> change, StringBuilder output) {
+        if (change.containsKey(coin)) {
+            output.append(coin.getAmount()).append("원 - ").append(change.get(coin)).append("개\n");
+        }
+    }
+
     public Map<Coin, Integer> giveChange(int userMoney) {
         Map<Coin, Integer> change = new EnumMap<>(Coin.class);
         if (isFullChange(userMoney)) {
